@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 
 export const Greetings = () => {
+    const renders = useRef(0);
+
+    console.log('Greeting renders: ' + renders.current++);
     /* Called each time the app renders */
     useEffect(() => {
-        console.log('render');
-
         // Cleanup function
         return () => {
             console.log('unmount');

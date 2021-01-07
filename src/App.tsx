@@ -14,7 +14,7 @@ const App = () => {
         password:'',
         firstName: ''
     });
-    // const [showGreeting, setShowGreeting] = React.useState(true);
+    const [showGreeting, setShowGreeting] = React.useState(true);
 
     // API useEffect
     // http://numbersapi.com/43/trivia
@@ -34,8 +34,8 @@ const App = () => {
         <div>count: {count}</div>
         <button onClick={() => setCount((c:any) => c+1)}>increment</button>
 
-        {/* <button onClick={() => setShowGreeting(!showGreeting)}>toggle</button>
-        {showGreeting && <Greetings/>} */}
+        <button onClick={() => setShowGreeting(!showGreeting)}>toggle</button>
+        {showGreeting && <Greetings/>}
     
         <input ref={inputRef} name='email' value={values.email} onChange={handleChange}/>
         <input name='firstname' value={values.firstname} onChange={handleChange}/>
