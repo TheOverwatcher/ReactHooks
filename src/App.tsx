@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import './App.scss';
 import { Greetings } from './Greetings';
+import { useFetch } from './useFetch';
 import {useForm} from './useForm';
 
 function initialState() {
@@ -8,34 +9,23 @@ function initialState() {
 }
 
 const App = () => { 
-//   const [count3, setCount3] = useState(30);
-//   const [{count, count2}, setCount] = useState(() => initialState());
-    const [values, handleChange] = useForm({email:'', password:'', firstName: ''});
+    const [values, handleChange] = useForm({
+        email:'',
+        password:'',
+        firstName: ''
+    });
     // const [showGreeting, setShowGreeting] = React.useState(true);
 
-    // Great place to use event listeners and clean them up
-    useEffect(() => {
-        const onMouseMove = (e:any) => {
-            console.log(e);
-        }
-        window.addEventListener('mousemove', onMouseMove);
-
-        // Cleanup function
-        return () => {
-            window.removeEventListener('mousemove', onMouseMove)
-        }
-    }, []);
+    // API useEffect
+    // http://numbersapi.com/43/trivia
+    const [count, setCount] = useState(0);
+    const {data, loading} = useFetch(`http://numbersapi.com/${count}/trivia`);
 
   return (
     <div>
-        {/* <button onClick={() => {
-            setCount(currentState => ({...currentState, count: currentState.count + 1}))
-            setCount3(c3 => c3 + 1)
-        }
-            }>+</button>
-        <div>count 1:{count}</div>
-        <div>count 2:{count2}</div>
-        <div>count 3:{count3}</div> */}
+        <div>{!data ? 'loading...' : data} </div>
+        <div>count: {count}</div>
+        <button onClick={() => setCount(c => c+1)}>increment</button>
 
         {/* <button onClick={() => setShowGreeting(!showGreeting)}>toggle</button>
         {showGreeting && <Greetings/>} */}
