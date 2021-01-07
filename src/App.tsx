@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.scss';
 import { Greetings } from './Greetings';
 import {useForm} from './useForm';
@@ -11,8 +11,20 @@ const App = () => {
 //   const [count3, setCount3] = useState(30);
 //   const [{count, count2}, setCount] = useState(() => initialState());
     const [values, handleChange] = useForm({email:'', password:'', firstName: ''});
-    const [showGreeting, setShowGreeting] = React.useState(true);
+    // const [showGreeting, setShowGreeting] = React.useState(true);
 
+    // Great place to use event listeners and clean them up
+    useEffect(() => {
+        const onMouseMove = (e:any) => {
+            console.log(e);
+        }
+        window.addEventListener('mousemove', onMouseMove);
+
+        // Cleanup function
+        return () => {
+            window.removeEventListener('mousemove', onMouseMove)
+        }
+    }, []);
 
   return (
     <div>
@@ -25,8 +37,8 @@ const App = () => {
         <div>count 2:{count2}</div>
         <div>count 3:{count3}</div> */}
 
-        <button onClick={() => setShowGreeting(!showGreeting)}>toggle</button>
-        {showGreeting && <Greetings/>}
+        {/* <button onClick={() => setShowGreeting(!showGreeting)}>toggle</button>
+        {showGreeting && <Greetings/>} */}
     
         <input name='email' value={values.email} onChange={handleChange}/>
         <input name='firstname' value={values.firstname} onChange={handleChange}/>
