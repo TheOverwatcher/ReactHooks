@@ -14,26 +14,15 @@ const App = () => {
         password:'',
         firstName: ''
     });
+    
     const [showGreeting, setShowGreeting] = React.useState(true);
 
     // API useEffect
     // http://numbersapi.com/43/trivia
-    const [count, setCount] = useState(() => 
-        JSON.parse(localStorage.getItem('count') as any)
-    );
-    const {data, loading} = useFetch(`http://numbersapi.com/${count}/trivia`);
+
     const inputRef = useRef<HTMLInputElement>(null);
-
-    useEffect(() => {
-        localStorage.setItem('count', JSON.stringify(count))
-    }, [count]);
-
   return (
     <div>
-        <div>{!data ? 'loading...' : data} </div>
-        <div>count: {count}</div>
-        <button onClick={() => setCount((c:any) => c+1)}>increment</button>
-
         <button onClick={() => setShowGreeting(!showGreeting)}>toggle</button>
         {showGreeting && <Greetings/>}
     
